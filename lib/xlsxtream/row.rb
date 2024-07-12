@@ -52,7 +52,9 @@ module Xlsxtream
         else
           value = value.to_s
 
-          unless value.empty? # no xml output for for empty strings
+          if value.empty?
+            xml << %Q{<c r="#{cid}"/>}
+          else
             value = value.encode(ENCODING) if value.encoding != ENCODING
 
             if @sst
